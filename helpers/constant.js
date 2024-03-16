@@ -21,5 +21,33 @@ module.exports = {
         } catch (error) {
             console.error('Error while fetching access token:', error.message);
         }
-    }
+    },
+    apiGet: async (url) => {
+        try {
+            const token = cache.get('access_token');
+            const options = {
+                method: 'GET',
+                headers: { 'Authorization': `Bearer ${token}` },
+                url,
+            };
+            const { data } = await axios(options);
+            return data
+        } catch (error) {
+            console.log(error, "ERROR")
+        }
+    },
+    apiPost: async (body, url) => {
+        try {
+            const { data } = await axios({
+                method: 'POST',
+                url: url,
+                headers: { 'Authorization': `Bearer ${token}` },
+                data:body
+            });
+            return data
+        } catch (error) {
+            console.log(error.message,"ERROR")
+        }
+    },
 }
+
