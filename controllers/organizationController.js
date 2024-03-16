@@ -1,8 +1,8 @@
-const axios = require('axios');
+const axios = require('axios')
 
 class OrganizationController {
-    static async healtCheck(req,res){
-        res.send('Organization');
+    static async healtCheck(req, res) {
+        res.send('Organization')
     }
 }
 

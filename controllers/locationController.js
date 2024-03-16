@@ -1,8 +1,8 @@
-const axios = require('axios');
+const axios = require('axios')
 
 class LocationController {
-    static async healtCheck(req,res){
-        res.send('Location');
+    static async healtCheck(req, res) {
+        res.send('Location')
     }
 }
 

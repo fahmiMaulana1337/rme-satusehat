@@ -1,8 +1,8 @@
-const axios = require('axios');
+const axios = require('axios')
 
 class EncounterController {
-    static async healtCheck(req,res){
-        res.send('Encounter');
+    static async healtCheck(req, res) {
+        res.send('Encounter')
     }
 }
 
