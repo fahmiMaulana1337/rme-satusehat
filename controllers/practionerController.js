@@ -4,7 +4,7 @@ const helper = require('../helpers/constant')
 class PractitionerController {
     static async getPractitionerByNIK(req, res, next) {
         try {
-            const { nik } = req.params
+            const { nik } = req.body
             url += `?identifier=https://fhir.kemkes.go.id/id/nik|${nik}`
             const data = await helper.apiGet(url)
             res.status(200).json(data)
