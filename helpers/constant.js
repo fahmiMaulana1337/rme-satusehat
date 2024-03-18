@@ -15,8 +15,9 @@ module.exports = {
                 data: body,
                 url,
             }
-            const { data } = await axios(options)
-            cache.put('access_token', data.access_token, 3600000)
+            // const { data } = await axios(options)
+            // cache.clear()
+            cache.put('access_token', 'uJ2ftsgFMaablSDpxq0QyWS21Wjj')
         } catch (error) {
             console.error('Error while fetching access token:', error.message)
         }
@@ -24,6 +25,7 @@ module.exports = {
     apiGet: async (url) => {
         try {
             const token = cache.get('access_token')
+            console.log('🚀 ~ apiGet: ~ token:', token)
             const options = {
                 method: 'GET',
                 headers: { Authorization: `Bearer ${token}` },
