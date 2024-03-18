@@ -28,7 +28,9 @@ module.exports = {
             console.log('🚀 ~ apiGet: ~ token:', token)
             const options = {
                 method: 'GET',
-                headers: { Authorization: `Bearer ${token}` },
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
                 url,
             }
             const { data } = await axios(options)
