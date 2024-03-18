@@ -5,6 +5,7 @@ const GeneralController = require('../controllers/GeneralController')
 const patientRoute = require('./patientRoute')
 const practitionerRouter = require('./practitioner')
 const locationRouter = require('./locationRoute')
+const organizationRouter = require('./organization')
 
 router.use(checkToken)
 router.get('/check', GeneralController.healtCheck)
