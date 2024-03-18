@@ -1,6 +1,7 @@
 const axios = require('axios')
 let url = 'https://api-satusehat-stg.dto.kemkes.go.id/fhir-r4/v1/Location'
 const helper = require('../helpers/constant')
+const { response } = require('express')
 
 class LocationController {
     static async healtCheck(req, res) {
@@ -8,14 +9,12 @@ class LocationController {
     }
 
     //query dinamis name, identifier,organisasi
-    static async getLocations(req, res) {
+    static async getLocationsDynamic(req, res) {
         try {
-            let { name } = req.query
-            // let { key } = Object.keys(params)[0]
-            // let value = params.key
-            console.log(name, 'key>>>>>>>>>>>>>>>>>')
-            url += `?name=${name}`
-            console.log(url, 'url >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.')
+            let params = req.query
+            let key = Object.keys(params)
+            let value = Object.values(params)
+            url += `?${key}=${value}`
             const data = await helper.apiGet(url)
             res.status(200).json(data)
         } catch (error) {
@@ -24,6 +23,18 @@ class LocationController {
                 status: 500,
                 message: 'internal server error',
             })
+        }
+    }
+
+    //query by id
+    static async getLocationsById(req, res) {
+        try {
+            let id = req.body.id
+            url += `/${id}`
+            const data = await helper.apiGet(url)
+            res.status(200).json(data)
+        } catch (error) {
+            console.error(error.data)
         }
     }
 }

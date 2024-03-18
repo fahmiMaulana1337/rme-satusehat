@@ -26,7 +26,9 @@ module.exports = {
             const token = cache.get('access_token')
             const options = {
                 method: 'GET',
-                headers: { Authorization: `Bearer ${token}` },
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
                 url,
             }
             const { data } = await axios(options)
