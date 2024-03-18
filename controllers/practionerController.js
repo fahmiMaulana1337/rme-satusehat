@@ -1,24 +1,38 @@
-const axios = require('axios')
-const cache = require('memory-cache')
+let url = 'https://api-satusehat-stg.dto.kemkes.go.id/fhir-r4/v1/Practitioner'
+const helper = require('../helpers/constant')
 
 class PractitionerController {
     static async getPractitionerByNIK(req, res, next) {
         try {
             const { nik } = req.params
-            const url = `https://api-satusehat-stg.dto.kemkes.go.id/fhir-r4/v1/Practitioner?identifier=https://fhir.kemkes.go.id/id/nik|${nik}`
-            const options = {
-                url,
-                method: 'GET',
-                headers: {
-                    'Content-type': 'application/json',
-                    Authorization: `Bearer ${cache.get('access_token')}`,
-                },
-            }
-            const { data } = await axios(options)
-            console.log(data)
+            url += `?identifier=https://fhir.kemkes.go.id/id/nik|${nik}`
+            const data = await helper.apiGet(url)
             res.status(200).json(data)
         } catch (error) {
             console.error(error)
+        }
+    }
+
+    static async getPractitionerByFilter(req, res, next) {
+        try {
+            let { name, date, gender } = req.body
+            url += `?name=${name}&gender=${gender}&birthdate=${date}`
+            const data = await helper.apiGet(url)
+            res.status(200).json(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async getPractitionerById(req, res, next) {
+        try {
+            const id = req.body.id
+            url += `/${id}`
+
+            const data = await helper.apiGet(url)
+            res.status(200).json(data)
+        } catch (error) {
+            console.log(error)
         }
     }
 }
