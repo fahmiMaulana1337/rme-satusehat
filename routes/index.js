@@ -11,5 +11,6 @@ router.get('/check', GeneralController.healtCheck)
 router.use('/api/v1/patient', patientRoute)
 router.use('/api/v1/practitioner', practitionerRouter)
 router.use('/api/v1/location', locationRouter)
+router.use('/api/v1/organization', organizationRouter)
 
 module.exports = router
