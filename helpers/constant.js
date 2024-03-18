@@ -19,7 +19,7 @@ module.exports = {
             const { data } = await axios(options)
             cache.put('access_token', data.access_token)
         } catch (error) {
-            console.error('Error while fetching access token:', error.message)
+            return error.response.data.issue[0].details.text
         }
     },
     apiGet: async (url) => {
@@ -36,20 +36,22 @@ module.exports = {
             const { data } = await axios(options)
             return data
         } catch (error) {
-            console.log(error.message, 'ERROR')
+            return error.response.data.issue[0].details.text
         }
     },
     apiPost: async (body, url) => {
         try {
-            const { data } = await axios({
+            const token = cache.get('access_token')
+            const data = await axios({
                 method: 'POST',
                 url: url,
                 headers: { Authorization: `Bearer ${token}` },
                 data: body,
             })
+            console.log("🚀 ~ apiPost: ~ data:", data.data)
             return data
         } catch (error) {
-            console.log(error.message, 'ERROR')
+            return {error:error.response.data.issue[0].details.text}
         }
     },
     formatResponse: async (code, message, response) => {
