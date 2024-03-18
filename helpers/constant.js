@@ -48,4 +48,11 @@ module.exports = {
             console.log(error.message, 'ERROR')
         }
     },
+    formatResponse: async (code,message, response) => {
+        const response = {
+            response_code: code,
+            message:message,
+            response:response
+        }
+    },
 }
