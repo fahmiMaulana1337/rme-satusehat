@@ -52,6 +52,19 @@ module.exports = {
             console.log(error.message, 'ERROR')
         }
     },
+    apiPut: async (body, url) => {
+        try {
+            const { data } = await axios({
+                method: 'PUT',
+                url,
+                headers: { Authorization: `Bearer ${token}` },
+                data: body,
+            })
+            return data
+        } catch (error) {
+            console.log(error.message, 'Error')
+        }
+    },
     formatResponse: async (code, message, response) => {
         const result = {
             response_code: code,

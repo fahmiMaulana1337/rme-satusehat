@@ -6,6 +6,8 @@ const patientRoute = require('./patientRoute')
 const practitionerRouter = require('./practitioner')
 const locationRouter = require('./locationRoute')
 const organizationRouter = require('./organization')
+const encounterRoute = require('./encounterRoute')
+const conditionRoute = require('./conditionRoute')
 
 router.use(checkToken)
 router.get('/check', GeneralController.healtCheck)
@@ -13,5 +15,7 @@ router.use('/api/v1/patient', patientRoute)
 router.use('/api/v1/practitioner', practitionerRouter)
 router.use('/api/v1/location', locationRouter)
 router.use('/api/v1/organization', organizationRouter)
+router.use('/api/v1/encounter', encounterRoute)
+router.use('/api/v1/condition', conditionRoute)
 
 module.exports = router
